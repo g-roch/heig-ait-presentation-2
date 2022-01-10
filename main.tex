@@ -22,17 +22,12 @@
 \newcommand*{\rot}{\rotatebox{90}}
 
 
-% \title{Bacula\\~\\AIT --- Présentation}
+\title{Redis\\~\\AIT --- Présentation}
 
-\title{
-    AIT --- Présentation \\~\\
-    \centering\includegraphics [height=20mm] {logo_bacula.png} 
-}
 % \titlegraphic{\includegraphics [height=.2\textheight] {logo_bacula.png}}
-\author{Gwendoline Dössegger, Noémie Plancherel, Gaby Roch, Cassandre Wojciechowski}
 \author{Cassandre Wojciechowski \\ Gwendoline Dössegger \\ Noémie Plancherel \\ Gaby Roch}
 \hypersetup{pdfauthor={G. Dössegger, N. Plancherel, G. Roch, C. Wojciechowski}}
-\date{8 novembre 2021}
+\date{\today}
 
 \begin{document}
 
@@ -40,7 +35,8 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Bacula -- Présentation générale}
+\begin{frame}{Redis -- Présentation générale}
+  \TODO
  \begin{itemize}
   \item Logiciel de sauvegarde multi-platform créé en 2000 par Kern Sibbald
   \item Première version 2002
@@ -57,21 +53,7 @@ Il existe une version entreprise avec plus de fonctionnalités mais cette fois-c
 \end{frame}
 
 \begin{frame}{Architecture}
-  \begin{center}
-    \includegraphics[height=80mm]{architecture.png}
-  \end{center}  
- \note{
- Bacula est composé de 5 composants principaux :
-\\~\\
-\begin{description}
-  \item[Director] il suppervise les opérations de sauvegarde, restauration, verification et archivage. C'est le composant principal et le point central des intéractions entre les composants.
-  \item[Console] c'est l'interface qui permet aux utilisateurs de communiquer avec le composant Director. Il existe 2 versions :  un shell et une interface web.
-  \item[Client (file daemon)] logiciel installé sur les machines clientes. Il est spécifique à l'OS sur lequel il est présent. Il sera chargé de transferer les données du client au storage et est aussi présent lors d'une opération de récupération.
-  \item[Storage] composant responsable de l'écriture des sauvegardes sur les médias choisi: Par exemple sur des disques, les bandes et dans le cloud.
-  \item[Catalog] stock les métadonnées pour toutres les activités de sauvegarde. 
-  \item[-] est chargé de la maintenance des index de fichiers et des bases de données des volumes pour l'ensemble des sauvegardes. Il stock les informations sur les différentes sauvegardes réalisées ce qui rend la restauration et la gestion des volumes efficace.
-\end{description}
-}
+ \note{ Bacula est composé de 5 composants principaux : }
 \end{frame}
 
 \begin{frame}{Architecture - Chiffrement}
@@ -80,25 +62,12 @@ Il existe une version entreprise avec plus de fonctionnalités mais cette fois-c
   \item La master key doit être sauvegardée manuellement hors-site
   \item S'il y a perte de la master key, les backups sont perdus
  \end{itemize}
- \note{
- En ce qui concerne le chiffrement, Bacula permet de chiffrer et signer les données a sauvegardé. Les données sont chiffrées autant lors de la transmission que dans le backup lui-même.
-\\~\\
-\begin{itemize}
-  \item Il faut tenir compte que seul le contenu des fichiers est chiffrés/signé alors que les métadonnées ne le sont pas (ça concerne par exemple : le nom du fichier, les permissions et le propriétaire du fichier).
-  \item Attention, il est important d'avoir plusieurs sauvegardes de la master key utilisé pour le chiffrement car si on la perd, toutes les données chiffrées seront perdu.
-  \item Communication via TLS =\> chiffrée (par ex Director - Console)
-\end{itemize}
-}
-
 \end{frame}
 
 \begin{frame}{Démonstration}
 \end{frame}
 
 \begin{frame}{CPU}
-\begin{center}
-  \includegraphics[height=50mm]{graphCPU}
-\end{center}
 \end{frame}
 
 \begin{frame}{Coûts}
@@ -130,16 +99,6 @@ Il existe une version entreprise avec plus de fonctionnalités mais cette fois-c
     \hline
  \end{tabular}
 \end{center}
-\note{Il y a également l'option du temps de réponse du support qui dépendra donc du niveau de sévérité de la panne (il y a 4 niveaux différents, 4 étant la plus sévère). Il y a donc différentes intervalles de jours et d'heures par abonnement.
-\\~\\
-Je précise que ce sont seulement des jours ainsi que des heures ouvrables, donc le week-end n'est pas inclu. -\> donc quelque chose à prendre en compte
-\\~\\
---\> au niveau des abonnements à prendre, tout dépend du besoin de l'entreprise et par exemple du besoin de disponibilité des données. Une entreprise qui possède un site web ou propose des services à des utilisateurs aura besoin d'un temps de réponse rapide, alors qu'une entreprise de recherche en informatique par exemple pourra accepter un temps de réponse plus large
-\\~\\
-Au niveau du coût total annuel de chaque abonnement, il est nécessaire de prendre contact avec Bacula afin de définir nos besoins spécifiques ainsi que notre projet de sauvegarde et restauration pour qu'ils fassent un devis. -\> Comme je l'ai dit avant, chaque entreprise a des besoins différents. Devis sur-mesure afin  de prendre l'abonnement qui convient le mieux
-\\~\\
-Il est également possible de télécharger une version d'essai de 1 mois afin de tester toutes les fonctionnalités ainsi que le support !! Mais on peut compter au minimum 500\$ par mois pour l'abonnement standard.
-}
 \end{frame}
 
 
@@ -168,16 +127,6 @@ Il est également possible de télécharger une version d'essai de 1 mois afin d
   \fcolorbox{black}{orange!50}{\rule{0pt}{4pt}\rule{4pt}{0pt}}\quad En développement
     \end{tablenotes}
  \end{center}
- \note{Les outils que je vais comparer avec Bacula c'est BorgBackup, Bup, Duplicati ainsi que rsync.
-\\~\\
-Bacula propose deux versions de son logiciel, une gratuite qui est open source et une autre payante. BorgBackup propose également ces deux options. Sinon tous les outils propose une version gratuite et open-source.
-\\~\\
-Bacula permet d'effectuer des backups de 3 manières différentes, full/incrémental/différentiel, BorgBackup le permet aussi. Sinon l'outil Duplicati propose le backup différentiel en moins.
-\\~\\
-La plupart des outils comparés peuvent être utilisés avec les systèmes d'exploitation Linux, MacOS et Windows. Il y a juste BorgBackup et Bup qui ne supporte pas Windows.
-\\~\\
--\> on constate finalement que Bacula est un outil complet qui est assez flexible. Mais BorgBackup peut également être une alternative possible, mais seulement si on n'utilise pas Windows.
- }
 \end{frame}
 
 \begin{frame}{Avantages / inconvénients}
@@ -212,17 +161,6 @@ La plupart des outils comparés peuvent être utilisés avec les systèmes d'exp
      \end{tabular}
 
     \end{center}
-\note{
-Bacula n'est \textbf{pas prévu pour effectuer des sauvegardes d'appareils connectés sporadiquement} mais pour des serveurs avec des adresses IP fixes. Le problème intervient quand l'appareil n'est pas connecté sur le réseau mais que le Director Daemon le cherche malgré tout. Il est tout de même possible de configurer Bacula pour cette situation spécifique avec un script, mais cela ajoute un peu de complexité. 
-\\~\\
-Il est possible de \textbf{modifier la priorité des processus de sauvegarde pour soulager le CPU}, ainsi que de moduler les types de backup et leur fréquence pour ne pas trop empiéter sur le réseau. 
-\\~\\
-La \textbf{déduplication élimine les copies excessives} de données et réduit considérablement les besoins en capacité de stockage. Elle s'effectue en arrière plan et ne ralentit donc pas la sauvegarde. Bacula utilise également un mécanisme de compression pour réduire la taille des fichiers et accélérer les processus. Cette déduplication des données permet d'alléger la charge réseau engendrée. 
-\\~\\
-Prise en main (conf) / Scan virus / config mobile 
-\\~\\ 
-GUI / Cross / Automatisation / Cdp / Mantenu / Cloud - hors-site / réseau CPU / Dédup. / Env. virtuelle / Doc
-}
 \end{frame}
 
 \begin{frame}{Conclusion}
@@ -239,9 +177,6 @@ Le RPO très faible et l'automatisation possible des sauvegardes engendrent une 
 \end{frame}
 
 \begin{frame}{Questions ?}
-  \begin{center}
-    \includegraphics[height=60mm]{bat_kitty.jpg}
-  \end{center}  
 \end{frame}
 
 
