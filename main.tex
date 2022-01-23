@@ -34,113 +34,107 @@
 \begin{frame}
   \titlepage
 \end{frame}
+\begin{frame}
+  \tableofcontents
+\end{frame}
 
+\section{Présentation générale}
 \begin{frame}{Redis -- Présentation générale}
  \begin{itemize}
-  \item 
+  \item Remote Dictionary Server
+  \item Créateur Salvatore Sanfilippo
+  \item Lancé en 2009 et continuellement mis à jour (dernière version 2021)
+  \item Gratuit, opensource et multiplateforme
+  \item Bonne Documentation
  \end{itemize}
  \note{blabla}
 \end{frame}
 
-\begin{frame}{Architecture}
+\section{Structure}
+\begin{frame}{Structure}
+\begin{itemize}
+  \item Base de données NoSQL (clé-valeur)
+  \item Structure de données : string, hash, listes, sets, ...
+  \item In-memory database
+\end{itemize}
  \note{ ...}
 \end{frame}
 
+\section{Démonstration}
 \begin{frame}{Démonstration}
+\TODO cas d'utilisation
 \end{frame}
 
+\section{Coûts}
 \begin{frame}{Coûts}
 \begin{center}
 
 \begin{itemize}
-    \item 
+    \item 2 versions: Open Source (gratuite) et Entreprise (payante)
+    \item La version Entreprise propose une autre implémentation du Redis Clusters
+    \item Elle propose également un Redis Entreprise Cloud qui assure une haute disponibilité (99\%) et de la persistence de données
+    \item Ainsi qu'un support 24h/24 7j/7
+    \item Possibilité de tester une version d'essai de 30 jours, sinon sur devis en fonction des besoins
 \end{itemize}
-
- \begin{tabular}{|l|ccccc|}
-    \hline
-    & Standard & Bronze & Silver & Gold & Platinum \\
-    \hline
-    \hline
-    Nombre de clients & < 50 & < 200 & < 500 & < 2000 & < 5000 \\
-    \hline
-    Nombre de contacts & 1 & 2 & 3 & 5 & 5 \\
-    \hline
-    Assistance & Web & Web & Web et tél.& Web et tél. & Web et tél. \\
-    \hline
-    Nombre d'OS & 4 & toutes & toutes & toutes & toutes \\
-    \hline
-    Temps de réponse & 1j -- 4j & 6h -- 4j & 4h -- 2j & 1h -- 2j & 1h -- 2j \\ %heure/jour ouvrable
-    du support &  & & & & \\
-    \hline
-    Formation & 0 & 0 & 0 & 0 & 1/an \\
-    \hline
- \end{tabular}
 \end{center}
+\note{ ... }
 \end{frame}
 
-
+\section{Comparaison}
 \begin{frame}{Comparaison}
- \begin{center}
-  \begin{tabular}{|l||c|c|c|c|c|c|c|c|c|c|}
-    \hline
-    & Coût & \rot{Open source ~} & Backups & \rot{Déduplication ~} & \rot{Chiffrement ~} & \rot{Compression ~} & \rot{Web interface} & \rot{Linux} & \rot{MacOS X} & \rot{Windows} \\
-    \hline
-    \hline
-    Bacula & \makecell{Gratuit\\Payant} & \cellcolor{green!50} & \makecell{Full\\ Incrémentaux\\ Différentiels} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} \\
-    \hline
-    BorgBackup & \makecell{Gratuit\\Payant} & \cellcolor{green!50} & \makecell{Full\\ Incrémentaux\\ Différentiels} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{orange!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{red!50} \\
-    \hline
-    Bup & Gratuit & \cellcolor{green!50} & Incrémentaux & \cellcolor{green!50} & \cellcolor{red!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & 
-    \cellcolor{red!50} \\
-    \hline
-    Duplicati & Gratuit & \cellcolor{green!50} & \makecell{Full\\ Incrémentaux} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50} \\
-    \hline
-    Rsync & Gratuit & \cellcolor{green!50} & Incrémentaux & \cellcolor{red!50} & \cellcolor{red!50} & \cellcolor{red!50} & \cellcolor{red!50} & \cellcolor{green!50} & \cellcolor{green!50} & \cellcolor{green!50}  \\
-    \hline
- \end{tabular}
- \begin{tablenotes}
- \scriptsize 
-  \fcolorbox{black}{green!50}{\rule{0pt}{4pt}\rule{4pt}{0pt}}\quad Oui \fcolorbox{black}{red!50}{\rule{0pt}{4pt}\rule{4pt}{0pt}}\quad Non
-  \fcolorbox{black}{orange!50}{\rule{0pt}{4pt}\rule{4pt}{0pt}}\quad En développement
-    \end{tablenotes}
+ \begin{center}\small
+  \begin{tabular}{|l|l|}
+     \hline
+      \textbf{Redis} & \textbf{Memcached} \\
+     \hline
+     \hline
+        Plusieurs types de données & Pas de type de données  \\
+        (string, hash, list, set, sorted set) & \\
+     \hline
+     Taille maximale de 512MB pour une valeur & Taille maximale de 1MB pour une valeur \\
+     \hline
+     Taille maximale de 512MB pour une clé  & Taille maximale de 250B pour une clé \\ 
+     \hline
+     Single thread (bonne scalabilité horizontale) & Multithreaded (scalabilité verticale facilitée) \\
+     \hline
+    Supporte 6 politiques d'expulsions & LRU comme seule politique d'expulsion  \\
+     (no eviction, all keys LRU, ...) & \\
+     \hline
+     \end{tabular}
  \end{center}
+ \note{ ... }
 \end{frame}
 
+
+
+\section{Avantages / inconvénients}
 \begin{frame}{Avantages / inconvénients}
-    \begin{center}\small
+  \begin{center}
      \begin{tabular}{|l|l|}
      \hline
       \textbf{Avantages} & \textbf{Inconvénients} \\
      \hline
      \hline
-        Interface utilisateur graphique & Prise en main complexe (fichiers \\ 
-                                        & de configuration) \\
+        UI graphique + CLI & Principe clé-valeur \\
      \hline
-     Cross-platform & Pas de scan de virus \\
+     Variété de langages & Opérations simples \\
      \hline
-     Automatisation \& planification des tâches & Configuration nécessaire au backup \\ 
-                                                & des appareils mobiles\\
+     Variété de types de données & Prix de la scalabilité \\
      \hline
-     Sauvegarde continue (CDP) & \\
+     Persistance & Single-threaded \\
      \hline
-     Toujours maintenu (dernière update : juin 2021) & \\
+     Clustering & Replication asynchrone \\
      \hline
-     Sauvegarde Cloud \& hors-site & \\
-     \hline
-     Charge réseau \& CPU modulables & \\
-     \hline
-     Déduplication des données & \\
-     \hline
-     Support d'environnements virtuels & \\
-     \hline
-     Large documentation et en plusieurs langues & \\
+     Performances & \\
      \hline
      \end{tabular}
 
     \end{center}
 \end{frame}
 
+\section{Conclusion}
 \begin{frame}{Conclusion}
+\TODO
  \begin{itemize}
   \item 
  \end{itemize}
