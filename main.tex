@@ -10,6 +10,7 @@
 \usepackage[french]{babel}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage{colortbl}
@@ -22,10 +23,10 @@
 \newcommand*{\rot}{\rotatebox{90}}
 
 
-\title{Redis\\~\\AIT --- Présentation}
+\title{AIT --- Présentation}
 
 % \titlegraphic{\includegraphics [height=.2\textheight] {logo_bacula.png}}
-\author{Cassandre Wojciechowski \\ Gwendoline Dössegger \\ Noémie Plancherel \\ Gaby Roch}
+\author{\includegraphics[height=2cm]{logo}\\Cassandre Wojciechowski \\ Gwendoline Dössegger \\ Noémie Plancherel \\ Gaby Roch}
 \hypersetup{pdfauthor={G. Dössegger, N. Plancherel, G. Roch, C. Wojciechowski}}
 \date{24 janvier 2022}
 
@@ -34,9 +35,9 @@
 \begin{frame}
   \titlepage
 \end{frame}
-\begin{frame}
-  \tableofcontents
-\end{frame}
+%\begin{frame}
+%  \tableofcontents
+%\end{frame}
 
 \section{Présentation générale}
 \begin{frame}{Redis -- Présentation générale}
@@ -45,7 +46,7 @@
   \item Créateur Salvatore Sanfilippo
   \item Lancé en 2009 et continuellement mis à jour (dernière version 2021)
   \item Gratuit, opensource et multiplateforme
-  \item Bonne Documentation
+  \item Bonne documentation
  \end{itemize}
  \note{blabla}
 \end{frame}
@@ -62,10 +63,14 @@
 
 \section{Database caching}
 \begin{frame}{Database caching}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[xshift=-3cm,yshift=-3cm] at (current page.north east){%
+    \includegraphics[width=5cm]{schema}};
+\end{tikzpicture}
 \begin{itemize}
   \item Look-Aside 
-  \item Taille de mémoire maximal configurée avec `maxmemory`
-  \item Politique d'expulsion selon deux algorithmes de gestion du cache
+  \item Taille de mémoire maximale avec `maxmemory`
+  \item Politique d'expulsion selon deux algorithmes \\ de gestion du cache
   \begin{itemize}
     \item LRU Algorithme approximatif
     \item LFU Algorithme
@@ -86,7 +91,7 @@
 \begin{itemize}
     \item 2 versions: Open Source (gratuite) et Entreprise (payante)
     \item La version Entreprise permet une distribution globale de base de données Active-Active
-    \item Elle assure une haute disponibilité (99\%) et de la persistence de données
+    \item Elle assure une haute disponibilité (99,999\%)
     \item Ainsi qu'un support 24h/24 7j/7
     \item Redis Entreprise possède 2 versions
     \begin{itemize}
@@ -114,7 +119,8 @@
      \hline
      Taille maximale de 512MB pour une clé  & Taille maximale de 250B pour une clé \\ 
      \hline
-     Single thread (bonne scalabilité horizontale) & Multithreaded (scalabilité verticale facilitée) \\
+     Single-threaded & Multi-threaded \\
+     (bonne scalabilité horizontale) & (scalabilité verticale facilitée) \\
      \hline
     Supporte 6 politiques d'expulsions & LRU comme seule politique d'expulsion  \\
      (no eviction, all keys LRU, ...) & \\
@@ -142,9 +148,11 @@
      \hline
      Persistance & Single-threaded \\
      \hline
-     Clustering & Replication asynchrone \\
+     Clustering & \\
      \hline
      Performances & \\
+     \hline
+     Documentation & \\
      \hline
      \end{tabular}
 
@@ -153,11 +161,11 @@
 
 \section{Conclusion}
 \begin{frame}{Conclusion}
-\TODO
  \begin{itemize}
-  \item 
+  \item Utilisé par de grands acteurs (Twitter, Stackoverflow, Github)
+  \item Flexibilité (langages, ...)
+  \item Implémentation facile pouvant se faire très tôt
  \end{itemize}
- \note{ ... }
 \end{frame}
 
 \begin{frame}{Questions ?}
