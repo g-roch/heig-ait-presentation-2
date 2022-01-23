@@ -53,9 +53,23 @@
 \section{Structure}
 \begin{frame}{Structure}
 \begin{itemize}
-  \item Base de données NoSQL (clé-valeur)
-  \item Structure de données : string, hash, listes, sets, ...
+  \item SGBD NoSQL (clé-valeur)
+  \item Types de données : string, object, listes, sets, ...
   \item In-memory database
+\end{itemize}
+ \note{ ...}
+\end{frame}
+
+\section{Database caching}
+\begin{frame}{Database caching}
+\begin{itemize}
+  \item Look-Aside 
+  \item Taille de mémoire maximal configurée avec `maxmemory`
+  \item Politique d'expulsion selon deux algorithmes de gestion du cache
+  \begin{itemize}
+    \item LRU Algorithme approximatif
+    \item LFU Algorithme
+ \end{itemize}
 \end{itemize}
  \note{ ...}
 \end{frame}
