@@ -1,0 +1,96 @@
+Redis (remote dictionary server)
+
++ https://www.youtube.com/watch?v=G1rOthIU-uo
+Created in 2009
+Created based on the idea that a cache can be a durable datastore
+sub millisecond latency, multi model DB
+
++ https://www.youtube.com/watch?v=muqiHwa8UvQ
+In-memory datastore (quick and easy access)
+- cache -> any type of structure (strings, hashes, lists, ...)
+-> flexibility
+all types of SDK available (C, Java, JS, Python, ...) + compatible with a lot of IoT (Raspberry Pi & ARM)
+main node - secondary node model
+high performance data retrieval
+
++ https://www.youtube.com/watch?v=8A_iNFRP0F4
+Store data inside redis cache instance -> quicker to retrieve the data for the web app
+Redis cache instance can be shared by multiple servers
+At first, the Redis instance does not contain data except for its configuration
+We need to populate it : 
+- by requesting data for the first time -> cache miss -> web server retrieves data from the server and stores it in the redis instance
+- use a cache worker (architecture type), situated between the redis instance and the data storage service
+
+Redis is very easily deployed as a standalone Docker container or inside a managed service (AWS, Microsoft Azure, Google Cloud, ...)
+
+1) retrieving data from RAM is so much faster than from a database especially if that database is in different server
+2) whenever there's an update to db you only fetch once and store in cache and subsequently any number of calls will query from cache instead of bothering the database. 
+
+redis is very valuable if you're running a large scale fleet of hundreds of webservers
+
+___________________________________________________________________________
+
+Info stockées en RAM, couche de persistance possible (redémarrage de l'ordi, possible de les récup vite) 
+info + complexes que DB std (+)
+use cases : gérer session user (clé + valeur), stockage d'info concernant le cache, possible de connaitre les clés les + fréquemment utilisées (+), celles qui le sont pas sont supprimées.
+(GET, SET, DEL, INCR, DECR, TTL, EXPIRE, ...) -> commandes possibles
+Possible de sauvegarde des listes (left, right), des sets (listes non ordonnées avec clé unique), ... 
+
+
+Commentaires : 
+slide 2 -> D majuscule à Documentation à tej
+taille de mémoire maximale avec E
+persistance -> avec un a en fr
+
+
+--------------
+___________________________________
+Avantages :
+	+ -> Interface graphique + command-line possibles
+		Nuance à apporter : l'UI est très simple
+
+	+ -> Peut être utilisé avec n'importe quel langage de programmation grâce à des drivers
+
+	+ -> Possibilité de sauvegarde des structures de données simples et/ou complexes
+		    -> FLEXIBILITE
+
+	+ -> Types de persistance possibles
+		Redémarrage du serveur, données toujours disponibles après
+			4 types disponibles ->
+			No persistence : possible de désactiver la persistance complétement
+			RDB : "Redis DataBase" snapshots à intervalles réguliers (customisables)
+			AOF : "Append Only File", chaque commande est loggée dans un fichier, elles sont rejouées au démarrage pour remettre la base de données dans le même état
+			AOF + RDB : combinaison des deux méthodes
+
+	+ -> Clustering
+		Partage automatique des données sur plusieurs noeuds Redis, disponibilité même quand il y a des problèmes (mauvaise communication ou crash) sur quelques noeuds (par contre, quand la majorité est indisponible, le système crash quand même)
+
+	+ -> Bonnes performances pour lire des données 
+		Etant donné que Redis permet du database caching en mode look-aside
+		A nuancer à cause du "cache miss" qui ajoute un overhead initial en cas d'absence des données dans la cache
+
+	+ -> Documentation bien faite et détaillée
+	Commentaire qui revient souvent dans les reviews / appréciations
+___________________________________
+Inconvénients : 
+	- -> Uniquement un principe de clé-valeur
+
+	- -> Opérations très simples, ne supporte pas les opérations complexes 
+		Pas de système relationnel du style MySQL pour sélectionner les objets correspondant à un critère
+		A nuancer, car c'est comme ça qu'il a été designé
+
+	- -> Single-threaded 
+		A nuancer, car décision de design, mais il faut déployer plusieurs instances pour une scalabilité horizontale
+
+	- -> Difficile à "scale" sans que ça devienne cher
+		Pour améliorer les performances, il faut améliorer les performances du matériel et cela coûte beaucoup plus cher
+
+___________________________________
+Conclusion : 
+Pour résumer, Redis est aujourd’hui beaucoup utilisé dans des infrastructures à fort trafic grâce aux excellentes performances, comme Pinterest, Twitter, Stackoverflow ou bien Github.
+
+Son implémentation est très facile et peut se faire très tôt dans un projet de petite dimension. 
+
+Cette implémentation est facilitée grâce à des drivers dans beaucoup de langages (PHP, JS, C, Swift, Python…) et d’outil de gestion des données.
+
+Nous avons aussi pu voir que Redis est très flexible.
