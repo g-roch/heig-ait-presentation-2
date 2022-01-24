@@ -22,18 +22,18 @@ Pour cela il existe deux algorithmes :
 sudo apt install redis-server
 ```
 
-Une installation manuelle est également possible : [redis.io/download](https://redis.io/download)
+Une installation manuelle est également possible: [redis.io/download](https://redis.io/download)
 
 #### Configuration
 
-La configuration se trouve dans le fichier `/etc/redis/redis.conf` Documentation: [redis.io/topics/config](https://redis.io/topics/config)
+La configuration se trouve dans le fichier `/etc/redis/redis.conf` (documentation: [redis.io/topics/config](https://redis.io/topics/config))
 
 ```sh
-# Créer un snapshot toutes les 5 minutes si au moin 10 entrées ont été modifié
+# Créer un snapshot toutes les 5 minutes si au moins 10 entrées ont été modifiées
 save 300 10
-# Définir la place maximal autorisé pour la DB à 300MiB
+# Définir la place maximale autorisée pour la DB à 300MiB
 maxmemory 300mb
-# définit la politique de supression (lorsqu'on atteint maxmemory)
+# Définit la politique de suppression (lorsqu'on atteint maxmemory)
 maxmemory-policy noeviction
 ```
 
