@@ -1,8 +1,8 @@
 # Redis - Cheat sheet
 
-> Date : 23.01.2022
+> Date : 24.01.2022
 >
-> Autheurs : Cassandre Wojciechowki, Gwendoline Dössegger, Noémie Plancherel, Gaby Roch
+> Auteurs : Gwendoline Dössegger, Noémie Plancherel, Gaby Roch, Cassandre Wojciechowki
 
 ### Présentation générale
 
